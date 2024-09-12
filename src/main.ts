@@ -175,7 +175,7 @@ function createHouse(coordinate: Coordinate, number: number) {
         anchor: [0.5, 0.5],
         anchorXUnits: "fraction",
         anchorYUnits: "fraction",
-        src: "assets/home.svg",
+        src: "home.svg",
       }),
       text: new Text({
         text: "" + number,
