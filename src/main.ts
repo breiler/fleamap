@@ -74,7 +74,7 @@ const trastgatanCoords = [
 
 const view = new View({
   center: [1834945.6270994311, 7688185.806455276],
-  zoom: 17,
+  zoom: 15.5,
 });
 
 const map = new Map({
@@ -157,18 +157,24 @@ new VectorLayer({
   map: map,
   source: new VectorSource({
     features: [
-      ...houses,
       streetAndgatanFeature,
       streetTradgardsgatanFeature,
       streetGrongatanFeature,
-      streetTrastgatanFeature,
-      accuracyFeature,
+      streetTrastgatanFeature
     ],
   }),
 });
 
+new VectorLayer({
+  map: map,
+  source: new VectorSource({
+    features: houses,
+  }),
+});
+
 const source = new VectorSource({
-  features: [positionFeature],
+  features: [positionFeature, accuracyFeature,
+  ],
 });
 new VectorLayer({
   map: map,
@@ -210,12 +216,9 @@ function createHouse(coordinate: Coordinate, number: number) {
           color: "white",
         }),
         offsetY: 3,
-        /*stroke: new Stroke({
-          color: 'white',
-          width: 2,
-        }),*/
       }),
     })
   );
+
   return house;
 }
