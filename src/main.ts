@@ -170,7 +170,7 @@ new VectorLayer({
 const source = new VectorSource({
   features: [positionFeature],
 });
-const layer = new VectorLayer({
+new VectorLayer({
   map: map,
   source: source,
 });
