@@ -15,6 +15,7 @@ import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { Coordinate } from "ol/coordinate";
 import { registerGeoLocation } from "./geolocation";
 import { LineString } from "ol/geom";
+import Control from "ol/control/Control";
 
 const andgatanCoords = [
   [1834799.6359179495, 7688303.12479069],
@@ -140,14 +141,14 @@ const houses = [
   createHouse([1834583.8121689286, 7688210.549791083], 21),
   createHouse([1834795.548464707, 7688014.252600205], 11),
   createHouse([1834819.0747197934, 7688077.47941075], 9),
-  createHouse([1834600.721664772, 7688106.1520341365], 10),
+  createHouse([1834552.292539619, 7688109.416662841], 10),
   createHouse([1834508.8222308403, 7687796.634740654], 27),
   createHouse([1834654.695639067, 7688283.715815516], 29),
   createHouse([1834563.9618911995, 7687953.966571541], 5),
   createHouse([1835181.526087219, 7688345.09056236], 15),
   createHouse([1834833.0434337505, 7688279.658165404], 23),
   createHouse([1834612.4847923152, 7688149.528566952], 8),
-  createHouse([1834686.5092851268, 7687920.810676357], 10),
+  createHouse([1834706.76138604, 7687969.035820373], 10),
 ];
 
 registerGeoLocation(view, accuracyFeature, positionFeature);
@@ -162,10 +163,35 @@ new VectorLayer({
       streetGrongatanFeature,
       streetTrastgatanFeature,
       accuracyFeature,
-      positionFeature,
     ],
   }),
 });
+
+const source = new VectorSource({
+  features: [positionFeature],
+});
+const layer = new VectorLayer({
+  map: map,
+  source: source,
+});
+
+const locate = document.createElement("div");
+locate.className = "ol-control ol-unselectable locate";
+locate.innerHTML = '<button title="Locate me">◎</button>';
+locate.addEventListener("click", function () {
+  if (!source.isEmpty()) {
+    map.getView().fit(source.getExtent(), {
+      maxZoom: 18,
+      duration: 500,
+    });
+  }
+});
+map.addControl(
+  new Control({
+    element: locate,
+  })
+);
+
 function createHouse(coordinate: Coordinate, number: number) {
   const house = new Feature();
   house.setGeometry(new Point(coordinate));
@@ -175,15 +201,15 @@ function createHouse(coordinate: Coordinate, number: number) {
         anchor: [0.5, 0.5],
         anchorXUnits: "fraction",
         anchorYUnits: "fraction",
-        src: "home.svg",
+        src: "star.svg",
       }),
       text: new Text({
         text: "" + number,
-        font: "bold 18px Calibri,sans-serif",
+        font: "bold 14px Calibri,sans-serif",
         fill: new Fill({
           color: "white",
         }),
-        offsetY: -4,
+        offsetY: 3,
         /*stroke: new Stroke({
           color: 'white',
           width: 2,
