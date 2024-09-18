@@ -17,10 +17,21 @@
         top: 6em;
         left: 0.5em;
       }
+
+      .show-all {
+        top: 9em;
+        left: 0.5em;
+      }
     </style>
   </head>
   <body>
     <div id="map" class="map"></div>
+    <div id="locate" class="ol-control ol-unselectable locate">
+      <button title="Locate me">◎</button>
+    </div>
+    <div id="showAll" class="ol-control ol-unselectable show-all">
+      <button title="Show all">🏠</button>
+    </div>
     <div id="info" style="display: none"></div>
     <label for="track">
       track position
