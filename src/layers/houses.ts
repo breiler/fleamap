@@ -42,7 +42,7 @@ const houses = [
   createHouse([1835181.526087219, 7688345.09056236], 15),
   createHouse([1834833.0434337505, 7688279.658165404], 23),
   createHouse([1834612.4847923152, 7688149.528566952], 8),
-  createHouse([1834706.76138604, 7687969.035820373], 10),
+  createHouse([1834706.76138604, 7687969.035820373], 8),
 ];
 
 export const housesLayer = new VectorLayer({
